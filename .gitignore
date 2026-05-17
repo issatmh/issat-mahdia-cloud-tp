@@ -1,0 +1,39 @@
+# Environment variables — NEVER commit secrets
+.env
+.env.*
+!.env.example
+
+# Docker secrets
+secrets/
+*.pem
+*.key
+*.crt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Nginx generated configs (contain session-specific data)
+nginx/conf.d/students/
+
+# n8n local data
+n8n/data/
+
+# Authentik media uploads
+authentik/media/
