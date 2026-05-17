@@ -1,0 +1,36 @@
+services:
+  vigie:
+    image: moubarakyampa/vigie:1.2.9
+    container_name: vigie
+    restart: unless-stopped
+    networks:
+      - vigie-net
+    ports:
+      - "5000:5000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - vigie_data:/data
+    environment:
+      DB_PATH: /data/dockerdash.db
+      SECRET_KEY: ${SECRET_KEY}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+
+  compilateur:
+    image: compilateur-issat:latest
+    container_name: compilateur
+    restart: unless-stopped
+    networks:
+      - vigie-net
+    ports:
+      - "5050:5050"
+    mem_limit: 512m
+    memswap_limit: 1g
+    cpus: "1"
+
+networks:
+  vigie-net:
+    driver: bridge
+
+volumes:
+  vigie_data:
+    driver: local

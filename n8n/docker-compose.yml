@@ -1,0 +1,22 @@
+services:
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      # Accès aux fichiers rendus étudiants (lecture seule)
+      - /home/docker/kasm-data:/home/docker/kasm-data:ro
+    environment:
+      N8N_HOST: n8n.issat.local
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      WEBHOOK_URL: http://n8n.issat.local/
+      GENERIC_TIMEZONE: Africa/Tunis
+      N8N_SECURE_COOKIE: "false"
+
+volumes:
+  n8n_data:
+    driver: local

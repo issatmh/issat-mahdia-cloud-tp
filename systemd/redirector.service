@@ -1,0 +1,17 @@
+[Unit]
+Description=Redirector Kasm — Flask service (port 8080)
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=docker
+WorkingDirectory=/home/docker/authentik
+ExecStart=/usr/bin/python3 /home/docker/authentik/redirector.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
